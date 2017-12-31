@@ -46,11 +46,11 @@ export class HomePage {
     }
 
     private createTables(): void{
-        this.db.executeSql('CREATE TABLE IF NOT EXIST `Cars` ( `idCars` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `color` TEXT NOT NULL, `length` INTEGER NOT NULL DEFAULT 4500, `weight` INTEGER NOT NULL DEFAULT 2000, `max_speed` INTEGER NOT NULL DEFAULT 300, `horsepower` INTEGER NOT NULL DEFAULT 400, `price` INTEGER NOT NULL DEFAULT 400000, `optionID` INTEGER, FOREIGN KEY(`optionID`) REFERENCES `option`(`idoption`) )', {})
+        this.db.executeSql('CREATE TABLE IF NOT EXISTS `Cars` ( `idCars` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `color` TEXT NOT NULL, `length` INTEGER NOT NULL DEFAULT 4500, `weight` INTEGER NOT NULL DEFAULT 2000, `max_speed` INTEGER NOT NULL DEFAULT 300, `horsepower` INTEGER NOT NULL DEFAULT 400, `price` INTEGER NOT NULL DEFAULT 400000, `optionID` INTEGER, FOREIGN KEY(`optionID`) REFERENCES `option`(`idoption`) )', {})
         .then(() => {
 
             console.log('Table Cars created !');
-            this.db.executeSql('CREATE TABLE IF NOT EXIST  `option` ( `idoption` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT )', {})
+            this.db.executeSql('CREATE TABLE IF NOT EXISTS  `option` ( `idoption` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT )', {})
             .then(() => console.log('Table option created !'))
             .catch(e => console.log(e));
         })
@@ -118,14 +118,9 @@ export class HomePage {
     }
 
     public show(idCars:number){
-        console.log("tozzz");
         this.navCtrl.push(ShowPage,{
             idCars:idCars
         });
-    }
-
-    public show2(){
-        this.navCtrl.push(ShowPage)
     }
 
     public contact(){

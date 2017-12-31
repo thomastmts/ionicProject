@@ -17,7 +17,6 @@
           <img src="assets/imgs/L2.jpg"/>
           <div>
             <button ion-button color="energy2" (click)="show(car.idCars)"> Show</button>
-            <button ion-button color="energy2" (click)="show2()"> Show</button>
             <button ion-button color="danger" (click)="delete(car.idCars)"> <ion-icon name="close"> Delete </ion-icon></button>  
             <button ion-button (click)="edit(car.idCars)"><ion-icon name="color-wand"> Edit </ion-icon></button>
             <button ion-button block color="energy3" (click)="contact()">Create my own car</button>
@@ -27,7 +26,8 @@
     </ion-list>
     <ion-row padding>
            <ion-col width-50 style="text-align: center">
-            <div><button ion-button (tap)="showall()" color="energy4">Get cars</button></div>
+            <div><button ion-button (tap)="showall()" color="energy4">Get cars</button>
+            </div>
            </ion-col>
     </ion-row>
     

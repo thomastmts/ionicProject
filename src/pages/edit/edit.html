@@ -5,45 +5,47 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
           <ion-title>
-            Contact
+            Contact {{car.idCars}}
           </ion-title>
         </ion-navbar>
       </ion-header>
       
       <ion-content padding id="welcome">
-        <ion-list>
+        <ion-list *ngIf="cars">
+        <ion-item *ngFor="let car of cars" color="energy3">
           <ion-item>
               <ion-label>Name : </ion-label>
-              <ion-input [(ngModel)]="name" value="{{car.idCars}}"  type="text"></ion-input>
+              <ion-input [(ngModel)]="name" value="{{car.name}}"  type="text"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label>Color : </ion-label>
-              <ion-input [(ngModel)]="color" type="text"></ion-input>
+              <ion-input [(ngModel)]="color" value="{{car.color}}" type="text"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label>Price : </ion-label>
-              <ion-input [(ngModel)]="price" type="int"></ion-input>
+              <ion-input [(ngModel)]="price" value="{{car.price}}" type="int"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label>Weight : </ion-label>
-              <ion-input [(ngModel)]="weight" type="int"></ion-input>
+              <ion-input [(ngModel)]="weight" value="{{car.weight}}" type="int"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label>Length : </ion-label>
-              <ion-input [(ngModel)]="length" type="int"></ion-input>
+              <ion-input [(ngModel)]="length" value="{{car.length}}" type="int"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label>Max_speed : </ion-label>
-              <ion-input [(ngModel)]="max_speed" type="int"></ion-input>
+              <ion-input [(ngModel)]="max_speed" value="{{car.max_speed}}" type="int"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label>Horsepower : </ion-label>
-              <ion-input [(ngModel)]="horsepower" type="int"></ion-input>
+              <ion-input [(ngModel)]="horsepower" value="{{car.horsepower}}" type="int"></ion-input>
           </ion-item>
           <ion-item>
               <ion-label>Option : </ion-label>
-              <ion-input [(ngModel)]="option" type="text"></ion-input>
+              <ion-input [(ngModel)]="option" value="{{car.option}}" type="text"></ion-input>
           </ion-item>
+        </ion-item>
         </ion-list>
         <button ion-button full color="light" (tap)="addCars()">Validé</button>
         <button ion-button (click)="home()">home</button>

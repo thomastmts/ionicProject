@@ -70,7 +70,7 @@ var EditPage = (function () {
 }());
 EditPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-edit',template:/*ion-inline-start:"/Users/thomashuang/ionicProject/src/pages/edit/edit.html"*/'<ion-header padding id="headerb">\n        <ion-navbar>\n            <meta name="Lamborghini" content="width=device=width, initial-scale=1">\n            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">\n            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> \n            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>\n          <ion-title>\n            Contact\n          </ion-title>\n        </ion-navbar>\n      </ion-header>\n      \n      <ion-content padding id="welcome">\n        <ion-list>\n          <ion-item>\n              <ion-label>Name : </ion-label>\n              <ion-input [(ngModel)]="name" value="{{car.idCars}}"  type="text"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Color : </ion-label>\n              <ion-input [(ngModel)]="color" type="text"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Price : </ion-label>\n              <ion-input [(ngModel)]="price" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Weight : </ion-label>\n              <ion-input [(ngModel)]="weight" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Length : </ion-label>\n              <ion-input [(ngModel)]="length" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Max_speed : </ion-label>\n              <ion-input [(ngModel)]="max_speed" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Horsepower : </ion-label>\n              <ion-input [(ngModel)]="horsepower" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Option : </ion-label>\n              <ion-input [(ngModel)]="option" type="text"></ion-input>\n          </ion-item>\n        </ion-list>\n        <button ion-button full color="light" (tap)="addCars()">Validé</button>\n        <button ion-button (click)="home()">home</button>\n      </ion-content>\n      '/*ion-inline-end:"/Users/thomashuang/ionicProject/src/pages/edit/edit.html"*/
+        selector: 'page-edit',template:/*ion-inline-start:"/Users/thomashuang/ionicProject/src/pages/edit/edit.html"*/'<ion-header padding id="headerb">\n        <ion-navbar>\n            <meta name="Lamborghini" content="width=device=width, initial-scale=1">\n            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">\n            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> \n            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>\n          <ion-title>\n            Contact {{car.idCars}}\n          </ion-title>\n        </ion-navbar>\n      </ion-header>\n      \n      <ion-content padding id="welcome">\n        <ion-list *ngIf="cars">\n        <ion-item *ngFor="let car of cars" color="energy3">\n          <ion-item>\n              <ion-label>Name : </ion-label>\n              <ion-input [(ngModel)]="name" value="{{car.name}}"  type="text"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Color : </ion-label>\n              <ion-input [(ngModel)]="color" value="{{car.color}}" type="text"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Price : </ion-label>\n              <ion-input [(ngModel)]="price" value="{{car.price}}" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Weight : </ion-label>\n              <ion-input [(ngModel)]="weight" value="{{car.weight}}" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Length : </ion-label>\n              <ion-input [(ngModel)]="length" value="{{car.length}}" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Max_speed : </ion-label>\n              <ion-input [(ngModel)]="max_speed" value="{{car.max_speed}}" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Horsepower : </ion-label>\n              <ion-input [(ngModel)]="horsepower" value="{{car.horsepower}}" type="int"></ion-input>\n          </ion-item>\n          <ion-item>\n              <ion-label>Option : </ion-label>\n              <ion-input [(ngModel)]="option" value="{{car.option}}" type="text"></ion-input>\n          </ion-item>\n        </ion-item>\n        </ion-list>\n        <button ion-button full color="light" (tap)="addCars()">Validé</button>\n        <button ion-button (click)="home()">home</button>\n      </ion-content>\n      '/*ion-inline-end:"/Users/thomashuang/ionicProject/src/pages/edit/edit.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */]])
 ], EditPage);
@@ -222,27 +222,59 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+var DATABASE_FILE_NAME = 'data.db';
 var ShowPage = (function () {
     function ShowPage(navCtrl, sqlite, navParams) {
         this.navCtrl = navCtrl;
         this.sqlite = sqlite;
         this.navParams = navParams;
         this.cars = [];
-        this.name = navParams.get('name');
-        this.color = navParams.get('color');
-        this.max_speed = navParams.get('max_speed');
-        this.horsepower = navParams.get('horsepower');
-        this.weight = navParams.get('weight');
-        this.length = navParams.get('length');
-        this.option = navParams.get('option');
-        this.price = navParams.get('price');
+        /* this.name=navParams.get('name');
+         this.color=navParams.get('color');
+         this.max_speed=navParams.get('max_speed');
+         this.horsepower=navParams.get('horsepower');
+         this.weight=navParams.get('weight');
+         this.length=navParams.get('length');
+         this.option=navParams.get('option');
+         this.price=navParams.get('price');*/
+        console.log('haha');
         this.idCars = navParams.get('idCars');
-        console.log(this.name);
-        //this.showone(this.idCars);
+        this.createDatabaseFile();
+        console.log(this.idCars);
+        this.showone(this.idCars);
     }
+    ShowPage.prototype.createDatabaseFile = function () {
+        var _this = this;
+        this.sqlite.create({
+            name: DATABASE_FILE_NAME,
+            location: 'default'
+        })
+            .then(function (db) {
+            console.log('Bdd créée !');
+            _this.db = db;
+            _this.createTables();
+        })
+            .catch(function (e) { return console.log(e); });
+    };
+    ShowPage.prototype.createTables = function () {
+        var _this = this;
+        console.log('rholalaaa');
+        this.db.executeSql('CREATE TABLE IF NOT EXISTS `Cars` ( `idCars` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `color` TEXT NOT NULL, `length` INTEGER NOT NULL DEFAULT 4500, `weight` INTEGER NOT NULL DEFAULT 2000, `max_speed` INTEGER NOT NULL DEFAULT 300, `horsepower` INTEGER NOT NULL DEFAULT 400, `price` INTEGER NOT NULL DEFAULT 400000, `optionID` INTEGER, FOREIGN KEY(`optionID`) REFERENCES `option`(`idoption`) )', {})
+            .then(function () {
+            console.log('Table Cars created !');
+            _this.db.executeSql('CREATE TABLE IF NOT EXISTS  `option` ( `idoption` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT )', {})
+                .then(function () { return console.log('Table option created !'); })
+                .catch(function (e) { return console.log(e); });
+        })
+            .catch(function (e) { return console.log(e); });
+    };
     ShowPage.prototype.showone = function (idCars) {
         var _this = this;
+        console.log('berkan');
         this.cars = [];
+        if (this.db == null) {
+            console.log('sepho');
+        }
         this.db.executeSql('SELECT * FROM `Cars` WHERE idCars=?', [idCars])
             .then(function (data) {
             if (data == null) {
@@ -257,7 +289,9 @@ var ShowPage = (function () {
                     }
                 }
             }
-        });
+        })
+            .catch(function (e) { return console.log(e); });
+        console.log('richie');
     };
     ShowPage.prototype.home = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
@@ -269,7 +303,7 @@ var ShowPage = (function () {
 }());
 ShowPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-show',template:/*ion-inline-start:"/Users/thomashuang/ionicProject/src/pages/show/show.html"*/'<ion-header>\n        <ion-navbar>\n            <meta name="Lamborghini" content="width=device=width, initial-scale=1">\n            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">\n            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> \n            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>\n          <ion-title>Car n° {{car.idCars}}</ion-title>\n        </ion-navbar>\n</ion-header>\n      \n<ion-content padding id="welcome">\n          <ion-item *ngFor="let car of cars">\n              <ion-label fixed>\n                  <div>\n                      Owner : {{car.name}}\n                      Color : {{car.color}}\n                      Weight : {{car.weight}}\n                      Length : {{car.length}}\n                      Max speed : {{car.max_speed}}</div>\n                \n              </ion-label>\n          </ion-item>\n          <button ion-button (click)="home()">Home</button>\n</ion-content>\n'/*ion-inline-end:"/Users/thomashuang/ionicProject/src/pages/show/show.html"*/
+        selector: 'page-show',template:/*ion-inline-start:"/Users/thomashuang/ionicProject/src/pages/show/show.html"*/'<ion-header>\n        <ion-navbar>\n            <meta name="Lamborghini" content="width=device=width, initial-scale=1">\n            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">\n            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> \n            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>\n          <ion-title>Car n° {{car.idCars}}</ion-title>\n        </ion-navbar>\n</ion-header>\n      \n<ion-content padding id="welcome">\n          <ion-item *ngFor="let car of cars">\n              <ion-label fixed>\n                  <div>\n                    hello\n                  </div>\n              </ion-label>\n          </ion-item>\n          <button ion-button (click)="home()">Home</button>\n\n\n\n\n</ion-content>'/*ion-inline-end:"/Users/thomashuang/ionicProject/src/pages/show/show.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
 ], ShowPage);
@@ -471,10 +505,10 @@ var HomePage = (function () {
     };
     HomePage.prototype.createTables = function () {
         var _this = this;
-        this.db.executeSql('CREATE TABLE IF NOT EXIST `Cars` ( `idCars` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `color` TEXT NOT NULL, `length` INTEGER NOT NULL DEFAULT 4500, `weight` INTEGER NOT NULL DEFAULT 2000, `max_speed` INTEGER NOT NULL DEFAULT 300, `horsepower` INTEGER NOT NULL DEFAULT 400, `price` INTEGER NOT NULL DEFAULT 400000, `optionID` INTEGER, FOREIGN KEY(`optionID`) REFERENCES `option`(`idoption`) )', {})
+        this.db.executeSql('CREATE TABLE IF NOT EXISTS `Cars` ( `idCars` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `name` TEXT NOT NULL, `color` TEXT NOT NULL, `length` INTEGER NOT NULL DEFAULT 4500, `weight` INTEGER NOT NULL DEFAULT 2000, `max_speed` INTEGER NOT NULL DEFAULT 300, `horsepower` INTEGER NOT NULL DEFAULT 400, `price` INTEGER NOT NULL DEFAULT 400000, `optionID` INTEGER, FOREIGN KEY(`optionID`) REFERENCES `option`(`idoption`) )', {})
             .then(function () {
             console.log('Table Cars created !');
-            _this.db.executeSql('CREATE TABLE IF NOT EXIST  `option` ( `idoption` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT )', {})
+            _this.db.executeSql('CREATE TABLE IF NOT EXISTS  `option` ( `idoption` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT )', {})
                 .then(function () { return console.log('Table option created !'); })
                 .catch(function (e) { return console.log(e); });
         })
@@ -538,13 +572,9 @@ var HomePage = (function () {
         });
     };
     HomePage.prototype.show = function (idCars) {
-        console.log("tozzz");
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__show_show__["a" /* ShowPage */], {
             idCars: idCars
         });
-    };
-    HomePage.prototype.show2 = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__show_show__["a" /* ShowPage */]);
     };
     HomePage.prototype.contact = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__contact_contact__["a" /* ContactPage */]);
@@ -553,7 +583,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/thomashuang/ionicProject/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n      <meta name="Lamborghini" content="width=device=width, initial-scale=1">\n      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">\n      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> \n      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>\n    <ion-title>All cars</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content id="welcome">\n    \n    <ion-list *ngIf="cars">\n      <ion-item *ngFor="let car of cars" color="energy3">\n        <ion-label>Car n{{ car.idCars }}\n          <div>Owner : {{ car.name }}</div>\n          <img src="assets/imgs/L2.jpg"/>\n          <div>\n            <button ion-button color="energy2" (click)="show(car.idCars)"> Show</button>\n            <button ion-button color="energy2" (click)="show2()"> Show</button>\n            <button ion-button color="danger" (click)="delete(car.idCars)"> <ion-icon name="close"> Delete </ion-icon></button>  \n            <button ion-button (click)="edit(car.idCars)"><ion-icon name="color-wand"> Edit </ion-icon></button>\n            <button ion-button block color="energy3" (click)="contact()">Create my own car</button>\n          </div>    \n        </ion-label>\n      </ion-item>\n    </ion-list>\n    <ion-row padding>\n           <ion-col width-50 style="text-align: center">\n            <div><button ion-button (tap)="showall()" color="energy4">Get cars</button></div>\n           </ion-col>\n    </ion-row>\n    \n</ion-content>\n'/*ion-inline-end:"/Users/thomashuang/ionicProject/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/thomashuang/ionicProject/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n      <meta name="Lamborghini" content="width=device=width, initial-scale=1">\n      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">\n      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> \n      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>\n    <ion-title>All cars</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content id="welcome">\n    \n    <ion-list *ngIf="cars">\n      <ion-item *ngFor="let car of cars" color="energy3">\n        <ion-label>Car n{{ car.idCars }}\n          <div>Owner : {{ car.name }}</div>\n          <img src="assets/imgs/L2.jpg"/>\n          <div>\n            <button ion-button color="energy2" (click)="show(car.idCars)"> Show</button>\n            <button ion-button color="danger" (click)="delete(car.idCars)"> <ion-icon name="close"> Delete </ion-icon></button>  \n            <button ion-button (click)="edit(car.idCars)"><ion-icon name="color-wand"> Edit </ion-icon></button>\n            <button ion-button block color="energy3" (click)="contact()">Create my own car</button>\n          </div>    \n        </ion-label>\n      </ion-item>\n    </ion-list>\n    <ion-row padding>\n           <ion-col width-50 style="text-align: center">\n            <div><button ion-button (tap)="showall()" color="energy4">Get cars</button>\n            </div>\n           </ion-col>\n    </ion-row>\n    \n</ion-content>\n'/*ion-inline-end:"/Users/thomashuang/ionicProject/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_sqlite__["a" /* SQLite */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
 ], HomePage);
