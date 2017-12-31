@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+      <meta name="Lamborghini" content="width=device=width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <ion-title>All cars</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="welcome">
+    
+    <ion-list *ngIf="cars">
+      <ion-item *ngFor="let car of cars" color="energy3">
+        <ion-label>Car n{{ car.idCars }}
+          <div>Owner : {{ car.name }}</div>
+          <img src="assets/imgs/L2.jpg"/>
+          <div>
+            <button ion-button color="energy2" (click)="show(car.idCars)"> Show</button>
+            <button ion-button color="energy2" (click)="show2()"> Show</button>
+            <button ion-button color="danger" (click)="delete(car.idCars)"> <ion-icon name="close"> Delete </ion-icon></button>  
+            <button ion-button (click)="edit(car.idCars)"><ion-icon name="color-wand"> Edit </ion-icon></button>
+            <button ion-button block color="energy3" (click)="contact()">Create my own car</button>
+          </div>    
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-row padding>
+           <ion-col width-50 style="text-align: center">
+            <div><button ion-button (tap)="showall()" color="energy4">Get cars</button></div>
+           </ion-col>
+    </ion-row>
+    
+</ion-content>

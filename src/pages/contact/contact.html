@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+      <meta name="Lamborghini" content="width=device=width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <ion-title>
+      Create page
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding id="welcome">
+    <h1> Create your own car : </h1>
+  <ion-list>
+    <ion-item>
+        <ion-label>Name : </ion-label>
+        <ion-input [(ngModel)]="name"  type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Color : </ion-label>
+        <ion-input [(ngModel)]="color" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Price : </ion-label>
+        <ion-input [(ngModel)]="price" type="int"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Weight : </ion-label>
+        <ion-input [(ngModel)]="weight" type="int"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Length : </ion-label>
+        <ion-input [(ngModel)]="length" type="int"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Max_speed : </ion-label>
+        <ion-input [(ngModel)]="max_speed" type="int"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Horsepower : </ion-label>
+        <ion-input [(ngModel)]="horsepower" type="int"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Option : </ion-label>
+        <ion-input [(ngModel)]="option" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button full color="light" (tap)="addCars()" color="energy2"><ion-icon name="checkmark"> Submit </ion-icon></button>
+</ion-content>
